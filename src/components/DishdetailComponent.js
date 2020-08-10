@@ -28,17 +28,19 @@ class DishDetail extends Component {
         return (
             <div>
                 <h4>Comments </h4>
-                <ul class="list-unstyled">
-                    {comments.map((myComment) => {
-                        return (
-                            <div>
-                                <li>{myComment.comment}</li>
-                                <li>-- {myComment.author}, {myComment.date.substr(0, myComment.date.indexOf("T"))}</li>
 
-                            </div>
-                        )
-                    })}
-                </ul>
+                {comments.map((myComment) => {
+                    return (
+                        <ul class="list-unstyled">
+                            <li>{myComment.comment}</li>
+                            <li>
+                                -- {myComment.author}, {new Intl.DateTimeFormat('en-US', { year: 'numeric', month: 'short', day: '2-digit' }).format(new Date(Date.parse(myComment.date)))}
+                            </li>
+
+                        </ul>
+                    )
+                })}
+
             </div>
         )
 
