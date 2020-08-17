@@ -37,9 +37,7 @@ class CommentForm extends Component {
     handleSubmit(values) {
 
         this.toggleModal();
-        console.log("here")
-        console.log(this.props.dishId, values.rating, values.author, values.comment)
-        this.props.addComment(this.props.dishId, values.rating, values.author, values.comment);
+        this.props.postComment(this.props.dishId, values.rating, values.author, values.comment);
     }
 
     render() {
@@ -78,7 +76,7 @@ class CommentForm extends Component {
                                     model=".author"
                                     show="touched"
                                     messages={{
-                                        
+
                                         minLength: 'Must be greater than 2 characters',
                                         maxLength: 'Must be 15 characters or less'
                                     }}
@@ -118,7 +116,7 @@ function RenderDish({ dish }) {
 
 }
 
-function RenderComments({ comments, addComment, dishId }) {
+function RenderComments({ comments, postComment, dishId }) {
 
     return (
         <div>
@@ -138,7 +136,7 @@ function RenderComments({ comments, addComment, dishId }) {
                 )
             })}
 
-            <CommentForm dishId={dishId} addComment={addComment} />
+            <CommentForm dishId={dishId} postComment={postComment} />
 
         </div>
     )
@@ -185,7 +183,7 @@ const DishDetail = (props) => {
                     </div>
                     <div className="col-12 col-md-5 m-1">
                         <RenderComments comments={props.comments}
-                            addComment={props.addComment}
+                            postComment={props.postComment}
                             dishId={props.dish.id}
                         />
 
